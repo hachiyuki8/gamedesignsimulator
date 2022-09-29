@@ -10,7 +10,7 @@
 
 **Screen Shot**:
 
-<img src="screenshot.png" width=750 height=480>
+<img src="screenshot.png" width=840 height=480>
 
 **How To Play**: UP and DOWN to select options, RETURN to confirm selection, R to revert to previous state
 
