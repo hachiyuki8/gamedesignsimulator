@@ -1,22 +1,20 @@
-# (TODO: your game's title)
+# Game Design Simulator
 
-Author: (TODO: your name)
+**Author**: Joanna Yao
 
-Design: (TODO: In two sentences or fewer, describe what is new and interesting about your game.)
+Design: Game design simulator where you are designing the exact game that you are playing
 
-Text Drawing: (TODO: how does the text drawing in this game work? Is text precomputed? Rendered at runtime? What files or utilities are involved?)
+Text Drawing: Text is rendered at runtime where each codepoint is shaped by Harfbuzz. The corresponding glyph is either read directly from the cache or loaded with Freetype (then cached). Finally, OpenGL handles the drawing.
 
-Choices: (TODO: how does the game store choices and narrative? How are they authored? Anything nifty you want to point out?)
+Choices: The game store choices in a nested hash map (authored directly in the game code), where each entry is a game state and different options lead to different new states
 
 Screen Shot:
 
 ![Screen Shot](screenshot.png)
 
-How To Play:
+How To Play: UP and DOWN to select options, RETURN to confirm selection, R to revert to previous state
 
-(TODO: describe the controls and (if needed) goals/strategy.)
-
-Sources: (TODO: list a source URL for any assets you did not create yourself. Make sure you have a license for the asset.)
+Sources: font: [Ubuntu](https://fonts.google.com/specimen/Ubuntu)
 
 This game was built with [NEST](NEST.md).
 

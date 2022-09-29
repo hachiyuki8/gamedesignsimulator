@@ -20,7 +20,7 @@ PlayMode::PlayMode() {
 		throw;
 	if (FT_New_Face (ft_library, data_path("font.ttf").c_str(), 0, &ft_face))
 		throw;
-	if (FT_Set_Char_Size (ft_face, FONT_SIZE*64, FONT_SIZE*64, 0, 0))
+	if (FT_Set_Char_Size (ft_face, (FT_F26Dot6) FONT_SIZE*64, (FT_F26Dot6) FONT_SIZE*64, 0, 0))
 		throw;
 
 	/* Create hb-ft font. */
@@ -41,7 +41,7 @@ PlayMode::PlayMode() {
 	glUniformMatrix4fv(color_texture_program->PROJECTION_mat4, 1, GL_FALSE, glm::value_ptr(projection)); 
 
 	// set size to load glyphs as
-    FT_Set_Pixel_Sizes(ft_face, 0, FONT_SIZE);
+    FT_Set_Pixel_Sizes(ft_face, 0, (FT_UInt) FONT_SIZE);
 
 	// disable byte-alignment restriction
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -580,13 +580,13 @@ void PlayMode::renderText(std::string text, float x, float y, float scale, glm::
     hb_buffer_set_script(hb_buffer, HB_SCRIPT_LATIN);
     hb_buffer_set_language(hb_buffer, hb_language_from_string("en", -1));
     size_t length = text.size();
-	hb_buffer_add_utf8(hb_buffer, text.c_str(), length, 0, length);
+	hb_buffer_add_utf8(hb_buffer, text.c_str(), (int) length, 0, (int) length);
 	hb_shape(hb_font, hb_buffer, NULL, 0);
 	unsigned int glyphCount;
     hb_glyph_info_t *glyphInfo = hb_buffer_get_glyph_infos(hb_buffer, &glyphCount);
 
-	for (int i = 0; i < glyphCount; ++i) {
-		auto c = glyphInfo[i].codepoint;
+	for (unsigned int i = 0; i < glyphCount; ++i) {
+		char c = (char) glyphInfo[i].codepoint;
 		// cache the glyphs
 		if (Characters.find(c) == Characters.end()) {
 			// load character glyph, see https://freetype.org/freetype2/docs/tutorial/step1.html
