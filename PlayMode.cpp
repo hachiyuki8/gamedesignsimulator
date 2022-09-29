@@ -555,7 +555,7 @@ void PlayMode::draw(glm::uvec2 const &drawable_size) {
 	}
 
 	y = SCREEN_HEIGHT / 2 - LINE_HEIGHT;
-	for (int i = 0; i < plots[curState]["options"].size(); i++) {
+	for (int i = 0; (size_t) i < plots[curState]["options"].size(); i++) {
 		std::string text = plots[curState]["options"][i];
 		if (i == curOption && text.size() > 0) {
 			text = "-> " + text;
@@ -586,7 +586,7 @@ void PlayMode::renderText(std::string text, float x, float y, float scale, glm::
     hb_glyph_info_t *glyphInfo = hb_buffer_get_glyph_infos(hb_buffer, &glyphCount);
 
 	for (unsigned int i = 0; i < glyphCount; ++i) {
-		char c = (char) glyphInfo[i].codepoint;
+		auto c = glyphInfo[i].codepoint;
 		// cache the glyphs
 		if (Characters.find(c) == Characters.end()) {
 			// load character glyph, see https://freetype.org/freetype2/docs/tutorial/step1.html
