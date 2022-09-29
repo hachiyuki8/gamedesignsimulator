@@ -95,10 +95,9 @@ void PlayMode::initStory() {
 			"... which is the exact game that you're playing right now"
 		}},
 		{"options", {
-			"(Press RETURN to continue)",
 			"... wait what?"
 		}},
-		{"states", {"begin4", "begin4"}}
+		{"states", {"begin4"}}
 	};
 
 	plots["begin4"] = {
@@ -241,9 +240,9 @@ void PlayMode::initStory() {
 		{"options", {
 			"3",
 			"5",
-			"42", // TODO
+			"10",
 		}},
-		{"states", {"contradiction", "early end", "TODO"}}
+		{"states", {"contradiction", "early end", "first question"}}
 	};
 
 	plots["early end"] = {
@@ -252,9 +251,238 @@ void PlayMode::initStory() {
 			"(I would highly suggest going back (use R to revert) to explore other options though :) )"
 		}},
 		{"options", {
-			"", // TODO
+			"",
 		}},
 		{"states", {"early end"}}
+	};
+
+	plots["first question"] = {
+		{"description", {
+			"What will the first question be?"
+		}},
+		{"options", {
+			"Background color",
+			"Font color",
+			"Number of questions",
+			"Type of the game",
+			"Name of the game",
+		}},
+		{"states", {"contradiction", "contradiction", "contradiction", "contradiction", "second question"}}
+	};
+
+	plots["second question"] = {
+		{"description", {
+			"What will the second question be?"
+		}},
+		{"options", {
+			"Background color",
+			"Font color",
+			"Number of questions",
+			"Type of the game",
+			"Name of the game",
+		}},
+		{"states", {"contradiction", "contradiction", "contradiction", "third question", "contradiction"}}
+	};
+
+	plots["third question"] = {
+		{"description", {
+			"What will the third question be?"
+		}},
+		{"options", {
+			"Background color",
+			"Font color",
+			"Number of questions",
+			"Type of the game",
+			"Name of the game",
+			"wait ...",
+		}},
+		{"states", {"fourth question", "contradiction", "contradiction", "contradiction", "contradiction", "fourth question 2"}}
+	};
+
+	plots["fourth question"] = {
+		{"description", {
+			"What will the fourth question be?"
+		}},
+		{"options", {
+			"Background color",
+			"Font color",
+			"Number of questions",
+			"Type of the game",
+			"Name of the game",
+
+		}},
+		{"states", {"contradiction", "fifth question", "contradiction", "contradiction", "contradiction"}}
+	};
+
+	plots["fourth question 2"] = {
+		{"description", {
+			"What will the fourth question be?"
+		}},
+		{"options", {
+			"Background color",
+			"Font color",
+			"Number of questions",
+			"Type of the game",
+			"Name of the game",
+			"This is never going to work"
+		}},
+		{"states", {"contradiction", "fifth question", "contradiction", "contradiction", "contradiction", "main"}}
+	};
+
+	plots["fifth question"] = {
+		{"description", {
+			"What will the fifth question be?"
+		}},
+		{"options", {
+			"Background color",
+			"Font color",
+			"Number of questions",
+			"Type of the game",
+			"Name of the game",
+		}},
+		{"states", {"contradiction", "contradiction", "broken game", "contradiction", "contradiction"}}
+	};
+
+	plots["broken game"] = {
+		{"description", {
+			"You have reached the end of this game - which is now a broken game :(",
+			"(you can go back (use R to revert) to explore other options)"
+		}},
+		{"options", {
+			"",
+		}},
+		{"states", {"broken game"}}
+	};
+
+	plots["main"] = {
+		{"description", {
+			"What do you mean?"
+		}},
+		{"options", {
+			"This game has 10 questions but I only got to specify the first five of them within 10 questions",
+			"Who are you?",
+		}},
+		{"states", {"observant", "who am I"}}
+	};
+
+	plots["observant"] = {
+		{"description", {
+			"How observant of you!"
+		}},
+		{"options", {
+			"Who are *you* anyways?",
+		}},
+		{"states", {"who am I"}}
+	};
+
+	plots["who am I"] = {
+		{"description", {
+			"\"I\" is a meaningless and arbitrary construct. I could be you and you could be me."
+		}},
+		{"options", {
+			"But you are not me",
+			"What do you mean you could be me?",
+		}},
+		{"states", {"not me", "me"}}
+	};
+
+	plots["not me"] = {
+		{"description", {
+			"You have reached the end of this game - which is still an incomplete game :(",
+			"(you can go back (use R to revert) to explore other options)"
+		}},
+		{"options", {
+			"",
+		}},
+		{"states", {"not me"}}
+	};
+
+	plots["me"] = {
+		{"description", {
+			"You created me when you created this game."
+		}},
+		{"options", {
+			"So you are part of me",
+			"I didn't create this game - you did",
+		}},
+		{"states", {"part of me", "not me"}}
+	};
+
+	plots["part of me"] = {
+		{"description", {
+			"And I'm stuck here as long as the game is unfinished"
+		}},
+		{"options", {
+			"Well, have fun then cuz I'm out",
+			"Wow. I have to finish this game to be a complete person",
+		}},
+		{"states", {"incomplete", "complete me"}}
+	};
+
+	plots["incomplete"] = {
+		{"description", {
+			"You reached the end of this game, but it bothers you knowing part of you is lost in it forever",
+			"(you can go back (use R to revert) to explore other options)"
+		}},
+		{"options", {
+			"",
+		}},
+		{"states", {"incomplete"}}
+	};
+
+	plots["complete me"] = {
+		{"description", {
+			"..."
+		}},
+		{"options", {
+			"So how do I finish this game?",
+		}},
+		{"states", {"design"}}
+	};
+
+	plots["design"] = {
+		{"description", {
+			"You have to finish *designing* the game"
+		}},
+		{"options", {
+			"Cool, I design the next step to be the end of the game then",
+			"Keep asking me what's the next thing that should happen in the game then"
+		}},
+		{"states", {"not me", "no more questions"}}
+	};
+
+	plots["no more questions"] = {
+		{"description", {
+			"I can't because this game only has 10 questions"
+		}},
+		{"options", {
+			"Fine, I will tell you what should happen next",
+			"Scratch that, the game can have as many questions as I want"
+		}},
+		{"states", {"next", "infinite"}}
+	};
+
+	plots["infinite"] = {
+		{"description", {
+			"The game now has an unlimited number of questions",
+			"The lost part of you got stuck in this endless game and is never to be found again",
+			"(you can go back (use R to revert) to explore other options)"
+		}},
+		{"options", {
+			"",
+		}},
+		{"states", {"infinite"}}
+	};
+
+	plots["next"] = {
+		{"description", {
+			"You carefully specified the exact things that happened in the game, including this very ending",
+			"The game is now finished and you become a complete person again (woohoo!)"
+		}},
+		{"options", {
+			""
+		}},
+		{"states", {"next"}}
 	};
 }
 
